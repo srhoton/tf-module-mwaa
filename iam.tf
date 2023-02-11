@@ -9,7 +9,7 @@ resource "aws_iam_policy" "mwaa_execution_policy" {
         {
             "Effect": "Allow",
             "Action": "airflow:PublishMetrics",
-            "Resource": "arn:aws:airflow:{$var.region}:{$var.account_id}:environment/{var.env_name}"
+            "Resource": "arn:aws:airflow:${var.region}:${var.account_id}:environment/${var.env_name}"
         },
         { 
             "Effect": "Deny",
