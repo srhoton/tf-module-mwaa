@@ -113,7 +113,7 @@ resource "aws_iam_role" "mwaa_execution_role" {
         Effect = "Allow"
         Sid    = ""
         Principal = {
-          Service = "ec2.amazonaws.com"
+          Service = "airflow-env.amazonaws.com"
         }
       },
     ]
