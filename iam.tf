@@ -102,3 +102,29 @@ resource "aws_iam_policy" "mwaa_execution_policy" {
 }  
 EOF
 }
+
+resource "aws_iam_role" "mwaa_execution_role" {
+  name = "${var.env_name}-mwaa-execution-role"
+    assume_role_policy = jsonencode({
+    Version = "2012-10-17"
+    Statement = [
+      {
+        Action = "sts:AssumeRole"
+        Effect = "Allow"
+        Sid    = ""
+        Principal = {
+          Service = "ec2.amazonaws.com"
+        }
+      },
+    ]
+  })
+
+  tags = {
+    "Name" = "${var.env_name}-mwaa-execution-role"
+  }
+}
+
+resource "aws_iam_role_policy_attachment" "mwaa_execution_role_policy_attachment" {
+    role = aws_iam_role.mwaa_execution_role.name
+    policy_arn = aws_iam_policy.mwaa_execution_policy.arn
+}
