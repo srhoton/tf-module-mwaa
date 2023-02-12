@@ -6,6 +6,7 @@ resource "aws_mwaa_environment" "mwaa_environment" {
   name = var.env_name
   webserver_access_mode = var.webserver_access_mode
   source_bucket_arn = aws_s3_bucket.mwaa_bucket.arn
+  requirements_s3_path = "s3:://${aws_s3_bucket.mwaa_bucket.id}/"
   logging_configuration {
     dag_processing_logs {
       enabled   = true
